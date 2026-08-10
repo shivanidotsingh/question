@@ -1,4 +1,3 @@
-
 const colorCombos = [
   { bg: "#228DC8", text: "#FC7ED7" },
   { bg: "#FBA332", text: "#FA6128" },
@@ -17,7 +16,6 @@ const colorCombos = [
   { bg: "#8AA9C6", text: "#D1BDFF" },
   { bg: "#393E41", text: "#E94F37" }
 ];
-
 const buttonPhrases = [
   "Nah, give me another question",
   "Hmm, ok hit me with one more",
@@ -28,24 +26,71 @@ const buttonPhrases = [
   "Try me again",
   "I want a different one"
 ];
-
 let remainingPrompts = [...prompts];
-
 function generatePrompt() {
     if (remainingPrompts.length === 0) {
     remainingPrompts = [...prompts];
   }
   const randomIndex = Math.floor(Math.random() * remainingPrompts.length);  
   const randomPrompt = remainingPrompts.splice(randomIndex, 1)[0];
-
   document.getElementById("prompt").innerText = randomPrompt.text;
-
   const color = colorCombos[Math.floor(Math.random() * colorCombos.length)];
   document.body.style.backgroundColor = color.bg;
   document.body.style.color = color.text;
-
   const button = document.querySelector("button");
   button.style.color = color.text;
   button.innerText = buttonPhrases[Math.floor(Math.random() * buttonPhrases.length)];
+}
 
+let remainingIcebreakers = [];
+function generateIcebreaker() {
+  if (remainingIcebreakers.length === 0) {
+    remainingIcebreakers = [...icebreakers];
+  }
+  const randomIndex = Math.floor(Math.random() * remainingIcebreakers.length);
+  const item = remainingIcebreakers.splice(randomIndex, 1)[0];
+  const color = colorCombos[Math.floor(Math.random() * colorCombos.length)];
+
+  document.body.style.backgroundColor = color.bg;
+  document.body.style.color = color.text;
+  document.getElementById("question").innerText = item.q;
+  document.getElementById("meta").innerText = item.date + " — " + item.contributor;
+  document.getElementById("context").innerText = item.context;
+
+  const button = document.querySelector("#mainView button");
+  button.style.color = color.text;
+  button.innerText = buttonPhrases[Math.floor(Math.random() * buttonPhrases.length)];
+}
+
+let gridOpen = false;
+function toggleGrid() {
+  gridOpen = !gridOpen;
+  document.getElementById("gridView").style.display = gridOpen ? "block" : "none";
+  document.getElementById("mainView").style.display = gridOpen ? "none" : "block";
+  document.getElementById("toggleBtn").textContent = gridOpen ? "×" : "#";
+  document.querySelector(".source-link").style.color = gridOpen ? "black" : "inherit";
+  if (gridOpen) buildGrid();
+}
+
+function buildGrid() {
+  const grid = document.getElementById("wordGrid");
+  grid.innerHTML = "";
+  icebreakers.forEach((item, i) => {
+    const color = colorCombos[i % colorCombos.length];
+    const card = document.createElement("div");
+    card.className = "word-card";
+    card.style.backgroundColor = color.bg;
+    card.style.color = color.text;
+    card.innerHTML = '<div class="card-word">' + item.q + '</div><div class="card-definition">' + item.date + ' — ' + item.contributor + '</div>';
+    card.onclick = () => {
+      const c = color;
+      document.body.style.backgroundColor = c.bg;
+      document.body.style.color = c.text;
+      document.getElementById("question").innerText = item.q;
+      document.getElementById("meta").innerText = item.date + " — " + item.contributor;
+      document.getElementById("context").innerText = item.context;
+      toggleGrid();
+    };
+    grid.appendChild(card);
+  });
 }
