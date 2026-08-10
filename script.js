@@ -26,7 +26,7 @@ const buttonPhrases = [
   "Try me again",
   "I want a different one"
 ];
-let remainingPrompts = [...prompts];
+let remainingPrompts = typeof prompts !== "undefined" ? [...prompts] : [];
 function generatePrompt() {
     if (remainingPrompts.length === 0) {
     remainingPrompts = [...prompts];
@@ -44,6 +44,7 @@ function generatePrompt() {
 
 let remainingIcebreakers = [];
 function generateIcebreaker() {
+  if (typeof icebreakers === "undefined") return;
   if (remainingIcebreakers.length === 0) {
     remainingIcebreakers = [...icebreakers];
   }
