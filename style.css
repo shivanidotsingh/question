@@ -91,7 +91,7 @@ p {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   max-width: 1400px;
-  margin: 0;
+  margin: 0 auto;
 }
 .word-card {
   padding: 20px;
