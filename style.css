@@ -54,15 +54,14 @@ p {
   z-index: 100;
 }
 .source-link {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+  display: block;
+  margin: 20px 0 0 5vw;
   font-size: 0.9rem;
   opacity: 0.6;
   color: inherit;
   text-decoration: underline;
-  z-index: 100;
 }
+
 .source-link:hover {
   opacity: 1;
 }
