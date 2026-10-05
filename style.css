@@ -36,7 +36,7 @@ p {
 }
 #mainView {
   max-width: 1100px;
-  margin-top: 4vh;
+  margin-top: 10vh;
   margin-left: 5vw;
   margin-right: auto;
 }
@@ -56,15 +56,14 @@ p {
   z-index: 100;
 }
 .source-link {
-  display: block;
-  margin: 60px 0 20px calc(5vw + 20px);
+  position: absolute;
+  top: 28px;
+  left: calc(5vw + 20px);
   font-size: 0.9rem;
   opacity: 0.6;
   color: inherit;
   text-decoration: underline;
 }
-
-
 .source-link:hover {
   opacity: 1;
 }
@@ -119,6 +118,8 @@ p {
   opacity: 0.75;
 }
 
-
+@media (max-width: 700px) {
+  h1 {
+    font-size: clamp(2.4rem, 9vw, 4.2rem);
+  }
 }
-
